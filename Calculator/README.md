@@ -51,4 +51,4 @@ Stack : [ 10, 11 ]
 Exemple d’implémentation :
 
 
-![image info](images/image)
+![image info](./images/image.png)
