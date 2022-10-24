@@ -28,12 +28,15 @@ Livrables :
 
 Principe de fonctionnement d’une calculatrice RPN :
 
-Stack : [] Push de 10 Stack : [ 10 ] Push de 5
+Stack : [] 
+Push de 10 
+Stack : [ 10 ] 
+Push de 5
 Stack : [ 10, 5 ]
 Push de 6
-
 Stack : [ 10, 5, 6 ]
-Operand ‘+’ Stack : [ 10, 11 ]
+Operand ‘+’ 
+Stack : [ 10, 11 ]
 
 
 
