@@ -51,4 +51,4 @@ Stack : [ 10, 11 ]
 Exemple d’implémentation :
 
 
-[https://gitlab.com/exalt-it-dojo/katas-java/-/raw/main/Calculator/images/image.PNG](url)
+ ![IMAGE_DESCRIPTION](https://gitlab.com/exalt-it-dojo/katas-java/-/raw/main/Calculator/images/image.PNG)
