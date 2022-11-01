@@ -26,9 +26,12 @@ public class StringCalculatorKata {
              ) {
 
             if (!wNumbers.isEmpty()) {
+                //Check if new delimeter is detected
                 if (wNumbers.startsWith("//")){
+                    // extract the new delimeter
                     defaultSeparator= wNumbers.substring(2,3);
-                    wNumbers =  wNumbers.substring(4);
+                    // substring the beginning of the string after extraction to get properly formatted string
+                    wNumbers = wNumbers.substring(4);
                 }
 
                 wNumbers = wNumbers.replace(newLineSeparator,defaultSeparator);

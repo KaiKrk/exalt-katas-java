@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class StringCalculatorKataTest {
@@ -61,6 +62,12 @@ public class StringCalculatorKataTest {
         final String number3 = "=1;2;3";
         final int sumOfNumbers = calculatorKata.add(number);
         assertThat(sumOfNumbers).isEqualTo(6);
+    }
+
+    @Test
+    void addNumbersWithOneNegativeShouldReturnErrorAndShowIt(){
+        final String number = "1,2,3,-4,5";
+        assertThrows(IllegalArgumentException.class, () -> calculatorKata.add(number), "no negative numbers allowed");
     }
 
 }
