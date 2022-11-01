@@ -31,4 +31,13 @@ public class StringCalculatorKataTest {
         assertThat(sumOfNumbers).isEqualTo(3);
     }
 
+    @Test
+    void addSeveralStringNumbersShouldReturn3(){
+        final String number1 = "1,2,3";
+        final String number2 = "1,2,3";
+        final String number3 = "1,2,3";
+        final int sumOfNumbers = calculatorKata.add(number1,number2,number3);
+        assertThat(sumOfNumbers).isEqualTo(18);
+    }
+
 }

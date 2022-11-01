@@ -6,10 +6,26 @@ public class StringCalculatorKata {
 
     final private String commaSeperator = ",";
 
-    public int add(String numbers) {
-        if (numbers.isEmpty())
+    public int add(String... numbers) {
+        /**
+         * this variable is used to concatenated all string into one, w stands for working
+         */
+        String wNumbers = "";
+
+        for (String n: numbers
+             ) {
+            if (wNumbers.isEmpty())
+                wNumbers = wNumbers.concat(n);
+            else
+                wNumbers = wNumbers.concat(commaSeperator+n);
+        }
+
+
+        if (wNumbers.isEmpty())
             return 0;
 
-        return Stream.of(numbers.split(commaSeperator)).mapToInt(Integer::parseInt).sum();
+        System.out.println(wNumbers);
+
+        return Stream.of(wNumbers.split(commaSeperator)).mapToInt(Integer::parseInt).sum();
     }
 }
