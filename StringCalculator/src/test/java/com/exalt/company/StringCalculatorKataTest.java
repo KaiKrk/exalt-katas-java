@@ -59,15 +59,26 @@ public class StringCalculatorKataTest {
     void addThreeStringsWithNewDelimeterCharNumberShouldReturn18(){
         final String number = "//;\n1;2\n3";
         final String number2 = "1;2\n3";
-        final String number3 = "=1;2;3";
-        final int sumOfNumbers = calculatorKata.add(number);
-        assertThat(sumOfNumbers).isEqualTo(6);
+        final String number3 = "1;2;3";
+        final int sumOfNumbers = calculatorKata.add(number, number2, number3);
+        assertThat(sumOfNumbers).isEqualTo(18);
     }
 
     @Test
     void addNumbersWithOneNegativeShouldReturnErrorAndShowIt(){
         final String number = "1,2,3,-4,5";
-        assertThrows(IllegalArgumentException.class, () -> calculatorKata.add(number), "no negative numbers allowed");
+        Exception risenException = assertThrows(IllegalArgumentException.class, () -> calculatorKata.add(number), "no negative numbers allowed");
+
+        assertTrue(risenException.getMessage().contains("-4"));
+        assertFalse(risenException.getMessage().contains("-5"));
+    }
+
+    @Test
+    void addNumbersWithFewNegativeShouldReturnErrorAndShowIt(){
+        final String number = "1,2,3,-4,5,-6,7,-8";
+        Exception risenException = assertThrows(IllegalArgumentException.class, () -> calculatorKata.add(number), "no negative numbers allowed" );
+        assertTrue(risenException.getMessage().contains("-4, -6, -8"));
+        assertFalse(risenException.getMessage().contains("-5, -6, -8"));
     }
 
 }

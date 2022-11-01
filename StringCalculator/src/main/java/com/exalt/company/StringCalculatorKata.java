@@ -1,5 +1,10 @@
 package com.exalt.company;
 
+import java.util.ArrayList;
+import java.util.IntSummaryStatistics;
+import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StringCalculatorKata {
@@ -20,29 +25,42 @@ public class StringCalculatorKata {
         int sumOfNumbers = 0;
 
         /**
+         * List to store any negative value
+         */
+        List negativeValueArray = new ArrayList();
+        /**
          * loop to sum the result of all String numbers sum's
          */
-        for (String wNumbers: numbers
+        for (String number: numbers
              ) {
 
-            if (!wNumbers.isEmpty()) {
+            if (!number.isEmpty()) {
                 //Check if new delimeter is detected
-                if (wNumbers.startsWith("//")){
+                if (number.startsWith("//")){
                     // extract the new delimeter
-                    defaultSeparator= wNumbers.substring(2,3);
+                    defaultSeparator= number.substring(2,3);
                     // substring the beginning of the string after extraction to get properly formatted string
-                    wNumbers = wNumbers.substring(4);
+                    number = number.substring(4);
+                }
+                //format the string with default delimeter between ints
+                number = number.replace(newLineSeparator,defaultSeparator);
+
+                final String wNumber = number;
+                // check through the current string of numbers if contains any negative value
+                Supplier<IntStream> numberAsArray = () -> Stream.of(wNumber.split(defaultSeparator)).mapToInt(Integer::parseInt);
+                for (int i : numberAsArray.get().toArray()){
+                    if( i < 0){
+                        negativeValueArray.add(i);
+                    }
                 }
 
-                wNumbers = wNumbers.replace(newLineSeparator,defaultSeparator);
-
-                sumOfNumbers += Stream.of(wNumbers.split(defaultSeparator)).mapToInt(Integer::parseInt).sum();
+                sumOfNumbers += numberAsArray.get().sum();
             }
-
-
         }
 
-
+        if(!negativeValueArray.isEmpty()){
+            throw new IllegalArgumentException("no negative are allowed " + negativeValueArray);
+        }
 
         return sumOfNumbers;
     }
