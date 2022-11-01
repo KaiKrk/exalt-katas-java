@@ -1,3 +1,5 @@
+package com.exalt.company;
+
 import com.exalt.company.StringCalculatorKata;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
