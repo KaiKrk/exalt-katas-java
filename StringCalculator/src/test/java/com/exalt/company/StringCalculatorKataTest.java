@@ -47,4 +47,11 @@ public class StringCalculatorKataTest {
         assertThat(sumOfNumbers).isEqualTo(6);
     }
 
+    @Test
+    void addOneTwoAndThreeWithNewDelimeterCharNumberShouldReturn6(){
+        final String number = "//;\n1,2\n3";
+        final int sumOfNumbers = calculatorKata.add(number);
+        assertThat(sumOfNumbers).isEqualTo(6);
+    }
+
 }

@@ -13,6 +13,9 @@ public class StringCalculatorKata {
          */
         String wNumbers = "";
 
+        /**
+         * loop to concatenate all numbers parameter to one string
+         */
         for (String n: numbers
              ) {
             if (wNumbers.isEmpty())
@@ -25,6 +28,8 @@ public class StringCalculatorKata {
             return 0;
 
         wNumbers = wNumbers.replace(newLineSeparator,commaSeperator);
+
+
 
         return Stream.of(wNumbers.split(commaSeperator)).mapToInt(Integer::parseInt).sum();
     }
