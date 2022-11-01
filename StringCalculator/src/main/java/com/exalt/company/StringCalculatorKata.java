@@ -12,7 +12,6 @@ public class StringCalculatorKata {
     final private String commaSeperator = ",";
     final private String newLineSeparator = "\n";
 
-
     /**
      * delimeter used to split the working String, set to comma by default but can change if new separator is detected
      */
