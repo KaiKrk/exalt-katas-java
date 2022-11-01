@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 public class StringCalculatorKata {
 
     final private String commaSeperator = ",";
+    final private String newLineSeparator = "\n";
 
     public int add(String... numbers) {
         /**
@@ -20,11 +21,10 @@ public class StringCalculatorKata {
                 wNumbers = wNumbers.concat(commaSeperator+n);
         }
 
-
         if (wNumbers.isEmpty())
             return 0;
 
-        System.out.println(wNumbers);
+        wNumbers = wNumbers.replace(newLineSeparator,commaSeperator);
 
         return Stream.of(wNumbers.split(commaSeperator)).mapToInt(Integer::parseInt).sum();
     }
