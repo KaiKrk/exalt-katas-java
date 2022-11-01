@@ -32,7 +32,7 @@ public class StringCalculatorKataTest {
     }
 
     @Test
-    void addSeveralStringNumbersShouldReturn3(){
+    void addSeveralStringNumbersShouldReturn18(){
         final String number1 = "1,2,3";
         final String number2 = "1,2,3";
         final String number3 = "1,2,3";
@@ -49,7 +49,16 @@ public class StringCalculatorKataTest {
 
     @Test
     void addOneTwoAndThreeWithNewDelimeterCharNumberShouldReturn6(){
-        final String number = "//;\n1,2\n3";
+        final String number = "//;\n1;2\n3";
+        final int sumOfNumbers = calculatorKata.add(number);
+        assertThat(sumOfNumbers).isEqualTo(6);
+    }
+
+    @Test
+    void addThreeStringsWithNewDelimeterCharNumberShouldReturn18(){
+        final String number = "//;\n1;2\n3";
+        final String number2 = "1;2\n3";
+        final String number3 = "=1;2;3";
         final int sumOfNumbers = calculatorKata.add(number);
         assertThat(sumOfNumbers).isEqualTo(6);
     }
