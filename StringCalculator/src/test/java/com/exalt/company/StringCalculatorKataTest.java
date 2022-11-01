@@ -40,4 +40,11 @@ public class StringCalculatorKataTest {
         assertThat(sumOfNumbers).isEqualTo(18);
     }
 
+    @Test
+    void addOneTwoAndThreeWithNewLineCharNumberShouldReturn6(){
+        final String number = "1,2\n3";
+        final int sumOfNumbers = calculatorKata.add(number);
+        assertThat(sumOfNumbers).isEqualTo(6);
+    }
+
 }
