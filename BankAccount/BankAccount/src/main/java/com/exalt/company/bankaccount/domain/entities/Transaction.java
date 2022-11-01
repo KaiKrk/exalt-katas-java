@@ -11,6 +11,8 @@ public class Transaction {
     private String account;
     private Double amount;
 
+    private Boolean isSuccesful;
+
     public Transaction (String id, LocalDate date, String account, Double amount){
         this.id = id;
         this.date = date;
@@ -31,5 +33,9 @@ public class Transaction {
 
     public LocalDate getDate() {
         return date;
+    }
+
+    public Boolean getIsSuccesful() {
+        return isSuccesful;
     }
 }
