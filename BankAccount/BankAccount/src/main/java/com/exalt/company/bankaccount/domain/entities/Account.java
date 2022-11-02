@@ -32,4 +32,8 @@ public class Account {
     public Double getFunds() {
         return funds;
     }
+
+    public void setFunds(Double funds) {
+        this.funds = funds;
+    }
 }

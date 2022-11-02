@@ -19,9 +19,9 @@ import static org.mockito.Mockito.doReturn;
 public class RetrieveTransactionHistoryTest {
 
 
-    @InjectMocks
-    TransactionHistoryPort transactionHistoryPort;
     @Mock
+    TransactionHistoryPort transactionHistoryPort;
+    @InjectMocks
     RetrieveTransactionHistory retrieveTransactionHistory;
 
     @Test
@@ -33,10 +33,10 @@ public class RetrieveTransactionHistoryTest {
         Double amount = +1500D;
         Boolean isSuccessful = true;
         List<Transaction> transactionList = Lists.newArrayList(new Transaction(transactionId,date,accountId,amount));
-        doReturn(transactionList).when(transactionHistoryPort).getHistory();
+        doReturn(transactionList).when(transactionHistoryPort).getHistory(accountId);
 
         //When
-        List<Transaction> results = retrieveTransactionHistory.execute();
+        List<Transaction> results = retrieveTransactionHistory.execute(accountId);
 
         //Then
         assertThat(results).containsExactlyElementsOf(transactionList);
