@@ -8,12 +8,12 @@ import java.util.List;
 @Component
 public class RetrieveTransactionHistory  {
 
-    private final TransactionHistoryPort transactionHistoryPort;
+    private final TransactionPort transactionPort;
 
-    public RetrieveTransactionHistory(TransactionHistoryPort transactionHistoryPort){
-        this.transactionHistoryPort = transactionHistoryPort;
+    public RetrieveTransactionHistory(TransactionPort transactionPort){
+        this.transactionPort = transactionPort;
     }
     public List<Transaction> execute(String accountId) {
-        return transactionHistoryPort.getHistory(accountId);
+        return transactionPort.getHistory(accountId);
     }
 }

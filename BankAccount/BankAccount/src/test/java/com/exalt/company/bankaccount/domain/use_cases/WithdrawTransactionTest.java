@@ -2,10 +2,13 @@ package com.exalt.company.bankaccount.domain.use_cases;
 
 import com.exalt.company.bankaccount.domain.entities.Account;
 import com.exalt.company.bankaccount.domain.entities.Transaction;
+import com.exalt.company.bankaccount.domain.use_cases.NotEnoughFundsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -13,10 +16,18 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 public class WithdrawTransactionTest {
 
     @Mock
+    AccountPort accountPort;
+    @Mock
     TransactionPort transactionPort;
+    @Mock
+    VerifyTransaction verifyTransaction;
+
+    @InjectMocks
+    WithdrawTransaction withdrawTransaction;
     Account account;
     LocalDate date = LocalDate.now();
 
@@ -38,8 +49,9 @@ public class WithdrawTransactionTest {
         Double amount = -10000D;
 
         Transaction transaction = new Transaction(transactionId,date ,account.getId(),amount);
-        when(transactionPort.updateAccount(account,transaction)).thenThrow(new IllegalArgumentException("Bank Transaction failed : not enough funds "));
+        when(withdrawTransaction.executeWithdrawTransaction(account, transaction))
+                .thenThrow(new NotEnoughFundsException());
         //Then
-        assertThrows(IllegalArgumentException.class, () -> transactionPort.updateAccount(account, transaction), "Bank Transaction failed : not enough funds ");
+        assertThrows(NotEnoughFundsException.class, () -> withdrawTransaction.executeWithdrawTransaction(account, transaction), "Bank Transaction failed : not enough funds ");
     }
 }

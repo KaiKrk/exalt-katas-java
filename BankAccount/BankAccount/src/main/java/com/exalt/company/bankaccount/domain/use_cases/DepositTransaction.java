@@ -7,8 +7,26 @@ import org.springframework.stereotype.Component;
 @Component
 public class DepositTransaction {
 
-    public Transaction executeDepositTransaction(String accountId,Transaction transaction){
+    private final AccountPort accountPort;
 
-        return null;
+    private final TransactionPort transactionPort;
+
+    private final RetrieveAccount retrieveAccount;
+
+    DepositTransaction(AccountPort accountPort, TransactionPort transactionPort, RetrieveAccount retrieveAccount){
+        this.accountPort = accountPort;
+        this.transactionPort = transactionPort;
+        this.retrieveAccount = retrieveAccount;
+    }
+
+    public Account executeDepositTransaction(String accountId,Transaction transaction){
+        Account userAccount = retrieveAccount.execute(accountId);
+
+        transaction.setSuccesful(true);
+        Transaction newTransaction = transactionPort.save(transaction);
+
+        userAccount.setFunds(userAccount.getFunds()+transaction.getAmount());
+
+        return accountPort.updateAccount(userAccount);
     };
 }

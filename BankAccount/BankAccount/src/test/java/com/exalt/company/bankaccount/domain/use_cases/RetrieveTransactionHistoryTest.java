@@ -20,7 +20,7 @@ public class RetrieveTransactionHistoryTest {
 
 
     @Mock
-    TransactionHistoryPort transactionHistoryPort;
+    TransactionPort transactionPort;
     @InjectMocks
     RetrieveTransactionHistory retrieveTransactionHistory;
 
@@ -33,7 +33,7 @@ public class RetrieveTransactionHistoryTest {
         Double amount = +1500D;
         Boolean isSuccessful = true;
         List<Transaction> transactionList = Lists.newArrayList(new Transaction(transactionId,date,accountId,amount));
-        doReturn(transactionList).when(transactionHistoryPort).getHistory(accountId);
+        doReturn(transactionList).when(transactionPort).getHistory(accountId);
 
         //When
         List<Transaction> results = retrieveTransactionHistory.execute(accountId);
