@@ -43,7 +43,7 @@ public class WithdrawTransactionTest {
 
 
     @Test
-    void withdrawMoreThanFundsShouldRaiseAnError(){
+    void withdrawMoreThanFundsShouldRaiseAnError() throws InterruptedException {
         //Given
         String transactionId = UUID.randomUUID().toString();
 

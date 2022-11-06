@@ -9,6 +9,7 @@ import com.exalt.company.bankaccount.domain.use_cases.WithdrawTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,7 +43,14 @@ public class TransactionAdapter {
     @PostMapping("/withdraw")
     @ResponseStatus(HttpStatus.OK)
     public void withdrawTransaction(@RequestParam String accountId ,@RequestBody TransactionApi transactionApi){
-        withdrawTransaction.executeWithdrawTransaction(retrieveAccount.execute(accountId), TransactionApi.toTransaction(transactionApi));
+
+        try {
+            withdrawTransaction.executeWithdrawTransaction(retrieveAccount.execute(accountId), TransactionApi.toTransaction(transactionApi));
+        }
+        catch (InterruptedException exc) {
+            throw new ResponseStatusException(
+                    HttpStatus.REQUEST_TIMEOUT, "A withdraw transaction is still in process", exc);
+        }
     }
 
     @GetMapping("/history")

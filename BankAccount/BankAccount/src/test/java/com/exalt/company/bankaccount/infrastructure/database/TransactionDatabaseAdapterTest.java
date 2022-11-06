@@ -1,8 +1,6 @@
 package com.exalt.company.bankaccount.infrastructure.database;
 
-import com.exalt.company.bankaccount.domain.entities.Account;
 import com.exalt.company.bankaccount.domain.entities.Transaction;
-import com.exalt.company.bankaccount.fixtures.AccountFixture;
 import com.exalt.company.bankaccount.fixtures.TransactionFixture;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +25,7 @@ public class TransactionDatabaseAdapterTest {
     void save_shouldSaveByUsingJpaRepository() {
         // Given
         Transaction transaction = TransactionFixture.aTransaction();
-        ArgumentCaptor<AccountJPA> accountJpaArgumentCaptor = ArgumentCaptor.forClass(AccountJPA.class);
+        ArgumentCaptor<TransactionJpa> accountJpaArgumentCaptor = ArgumentCaptor.forClass(TransactionJpa.class);
 
         // When
         transactionDatabaseAdapter.save(transaction);

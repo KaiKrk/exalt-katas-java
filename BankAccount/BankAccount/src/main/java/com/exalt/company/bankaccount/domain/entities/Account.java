@@ -1,6 +1,8 @@
 package com.exalt.company.bankaccount.domain.entities;
 
+import javax.persistence.Transient;
 import java.math.BigDecimal;
+import java.util.concurrent.Semaphore;
 import java.util.zip.DeflaterOutputStream;
 
 public class Account {
@@ -9,6 +11,11 @@ public class Account {
     private String firstname;
     private String lastname;
     private Double funds;
+
+    /**
+     * Semaphore is used here to assure that withdraw process can only be executed one at a time to ensure proper funds verifying process
+     */
+    private Semaphore semaphore = new Semaphore(1);
 
     public Account(){}
 
@@ -40,6 +47,10 @@ public class Account {
         return funds;
     }
 
+    public Semaphore getSemaphore() {
+        return semaphore;
+    }
+
     public void setFunds(Double funds) {
         this.funds = funds;
     }
@@ -55,4 +66,6 @@ public class Account {
     public void setId(String id) {
         this.id = id;
     }
+
+
 }

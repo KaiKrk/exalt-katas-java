@@ -25,10 +25,10 @@ public class AccountDatabaseAdapterTest {
     void save_shouldSaveByUsingJpaRepository() {
         // Given
         Account account = AccountFixture.aNewAccount();
-        ArgumentCaptor<AccountJPA> accountJpaArgumentCaptor = ArgumentCaptor.forClass(AccountJPA.class);
+        ArgumentCaptor<AccountJpa> accountJpaArgumentCaptor = ArgumentCaptor.forClass(AccountJpa.class);
 
         // When
-        accountDatabaseAdapter.save(account);
+        accountDatabaseAdapter.create(account);
 
         // Then
         verify(accountJpaRepository).save(accountJpaArgumentCaptor.capture());

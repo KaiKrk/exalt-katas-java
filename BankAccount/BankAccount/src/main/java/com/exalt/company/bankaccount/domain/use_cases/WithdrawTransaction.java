@@ -19,19 +19,24 @@ public class WithdrawTransaction {
     }
 
 
-    public Account executeWithdrawTransaction(Account account, Transaction transaction) {
+    public Account executeWithdrawTransaction(Account account, Transaction transaction) throws InterruptedException {
 
         if(VerifyTransaction.verifyFunds(account,transaction)){
+            account.getSemaphore().acquire();
             transaction.setSuccesful(true);
             transactionPort.save(transaction);
 
             account.setFunds(account.getFunds()+transaction.getAmount());
-
+            account.getSemaphore().release();
             return  accountPort.updateAccount(account);
 
         } else {
+            account.getSemaphore().acquire();
+
             transaction.setSuccesful(false);
             transactionPort.save(transaction);
+
+            account.getSemaphore().release();
           throw new NotEnoughFundsException();
         }
     }
