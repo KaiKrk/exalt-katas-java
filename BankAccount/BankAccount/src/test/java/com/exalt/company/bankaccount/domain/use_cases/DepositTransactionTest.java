@@ -1,5 +1,6 @@
 package com.exalt.company.bankaccount.domain.use_cases;
 
+import com.exalt.company.bankaccount.application.rest.AccountApi;
 import com.exalt.company.bankaccount.domain.entities.Account;
 import com.exalt.company.bankaccount.domain.entities.Transaction;
 import com.exalt.company.bankaccount.domain.entities.TransactionType;
@@ -54,7 +55,7 @@ public class DepositTransactionTest {
         wAccount.setFunds(5500D);
         doReturn(wAccount).when(depositTransaction).executeDepositTransaction(account.getId(), transaction);
         //When
-        Account updatedAccount = depositTransaction.executeDepositTransaction(account.getId(), transaction);
+        AccountApi updatedAccount = depositTransaction.executeDepositTransaction(account.getId(), transaction);
         //Then
         assertThat(updatedAccount.getFunds()).isEqualTo(account.getFunds()+amount);
     }

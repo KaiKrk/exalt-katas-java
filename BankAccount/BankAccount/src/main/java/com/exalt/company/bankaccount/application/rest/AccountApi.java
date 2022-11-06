@@ -42,7 +42,7 @@ public class AccountApi {
     }
 
 
-    static AccountApi toAccountApi(Account account){
+   public static AccountApi toAccountApi(Account account){
         AccountApi accountApi = new AccountApi();
         accountApi.setId(account.getId());
         accountApi.setFirstname(account.getFirstname());
@@ -52,7 +52,7 @@ public class AccountApi {
         return accountApi;
     }
 
-    static Account toAccount(AccountApi accountApi){
+    public static Account toAccount(AccountApi accountApi){
         Account account = new Account();
         account.setFirstname(accountApi.getFirstname());
         account.setLastname(accountApi.getLastname());

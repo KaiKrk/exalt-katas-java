@@ -6,7 +6,6 @@ public class Transaction {
 
     private String id;
     private LocalDate date;
-
     private TransactionType type;
 
     private String account;

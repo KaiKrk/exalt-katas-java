@@ -35,13 +35,13 @@ public class TransactionAdapter {
 
     @PostMapping("/deposit")
     @ResponseStatus(HttpStatus.OK)
-    public void depositTransaction(@RequestBody String accountId, TransactionApi transactionApi){
+    public void depositTransaction(@RequestParam String accountId ,@RequestBody TransactionApi transactionApi){
         depositTransaction.executeDepositTransaction(accountId, TransactionApi.toTransaction(transactionApi));
     }
 
     @PostMapping("/withdraw")
     @ResponseStatus(HttpStatus.OK)
-    public void withdrawTransaction(@RequestBody String accountId, TransactionApi transactionApi){
+    public void withdrawTransaction(@RequestParam String accountId ,@RequestBody TransactionApi transactionApi){
         withdrawTransaction.executeWithdrawTransaction(retrieveAccount.execute(accountId), TransactionApi.toTransaction(transactionApi));
     }
 

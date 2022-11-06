@@ -1,5 +1,6 @@
 package com.exalt.company.bankaccount.domain.use_cases;
 
+import com.exalt.company.bankaccount.application.rest.AccountApi;
 import com.exalt.company.bankaccount.domain.entities.Account;
 import com.exalt.company.bankaccount.domain.entities.Transaction;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,7 @@ public class DepositTransaction {
         this.retrieveAccount = retrieveAccount;
     }
 
-    public Account executeDepositTransaction(String accountId,Transaction transaction){
+    public AccountApi executeDepositTransaction(String accountId,Transaction transaction){
         Account userAccount = retrieveAccount.execute(accountId);
 
         transaction.setSuccesful(true);
@@ -27,6 +28,6 @@ public class DepositTransaction {
 
         userAccount.setFunds(userAccount.getFunds()+transaction.getAmount());
 
-        return accountPort.updateAccount(userAccount);
+        return AccountApi.toAccountApi( accountPort.updateAccount(userAccount));
     };
 }

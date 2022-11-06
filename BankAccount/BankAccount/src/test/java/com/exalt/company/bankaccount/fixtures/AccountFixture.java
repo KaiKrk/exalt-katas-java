@@ -14,4 +14,12 @@ public class AccountFixture {
 
         return new Account(id,firstname,lastname,funds);
     }
+
+    public static Account aNewAccount(){
+        String firstname = "Patrick";
+        String lastname = "Dou";
+        Double funds = 25000D;
+
+        return new Account(firstname,lastname,funds);
+    }
 }

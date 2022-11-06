@@ -6,9 +6,13 @@ import com.exalt.company.bankaccount.domain.use_cases.DepositTransaction;
 import com.exalt.company.bankaccount.domain.use_cases.RetrieveAccount;
 import com.exalt.company.bankaccount.domain.use_cases.WithdrawTransaction;
 import com.exalt.company.bankaccount.fixtures.AccountFixture;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.Is;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,7 @@ import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(AccountAdapter.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AccountAdapterTest {
 
     @Autowired
@@ -42,6 +47,14 @@ public class AccountAdapterTest {
     RetrieveAccount retrieveAccount;
 
 
+    ObjectMapper objectMapper;
+
+    @BeforeAll
+    void init(){
+        objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+    }
+
 
     @Test
     void getAccount() throws Exception {
@@ -53,5 +66,15 @@ public class AccountAdapterTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id", Is.is(account.getId())));
+    }
+
+    @Test
+    void createAccount() throws Exception {
+        Account account = AccountFixture.aNewAccount();
+        Mockito.when(createAccount.execute(account)).thenReturn(account);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/account/create")
+                        .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(account)))
+                .andExpect(MockMvcResultMatchers.status().isCreated());
     }
 }

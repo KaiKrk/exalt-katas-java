@@ -11,6 +11,12 @@ public class Account {
     private Double funds;
 
     public Account(){}
+
+    public Account( String firstname, String lastname, Double funds){
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.funds = funds;
+    }
     public Account(String id, String firstname, String lastname, Double funds){
         this.id = id;
         this.firstname = firstname;
