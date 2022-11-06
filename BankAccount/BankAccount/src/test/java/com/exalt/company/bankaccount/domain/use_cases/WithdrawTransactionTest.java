@@ -2,6 +2,7 @@ package com.exalt.company.bankaccount.domain.use_cases;
 
 import com.exalt.company.bankaccount.domain.entities.Account;
 import com.exalt.company.bankaccount.domain.entities.Transaction;
+import com.exalt.company.bankaccount.domain.entities.TransactionType;
 import com.exalt.company.bankaccount.domain.use_cases.NotEnoughFundsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,7 +49,7 @@ public class WithdrawTransactionTest {
 
         Double amount = -10000D;
 
-        Transaction transaction = new Transaction(transactionId,date ,account.getId(),amount);
+        Transaction transaction = new Transaction(transactionId,date, TransactionType.WITHDRAW ,account.getId(),amount);
         when(withdrawTransaction.executeWithdrawTransaction(account, transaction))
                 .thenThrow(new NotEnoughFundsException());
         //Then

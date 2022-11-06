@@ -21,11 +21,6 @@ public class WithdrawTransaction {
 
     public Account executeWithdrawTransaction(Account account, Transaction transaction) {
 
-//        Account account = retrieveAccount.execute(accountId);
-
-//        Account userAccount = retrieveAccount.execute(accountId);
-
-
         if(VerifyTransaction.verifyFunds(account,transaction)){
             transaction.setSuccesful(true);
             transactionPort.save(transaction);

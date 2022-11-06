@@ -45,10 +45,19 @@ public class AccountApi {
     static AccountApi toAccountApi(Account account){
         AccountApi accountApi = new AccountApi();
         accountApi.setId(account.getId());
-        accountApi.setFirstname(accountApi.getFirstname());
-        accountApi.setLastname(accountApi.getLastname());
-        accountApi.setFunds(accountApi.getFunds());
+        accountApi.setFirstname(account.getFirstname());
+        accountApi.setLastname(account.getLastname());
+        accountApi.setFunds(account.getFunds());
 
         return accountApi;
+    }
+
+    static Account toAccount(AccountApi accountApi){
+        Account account = new Account();
+        account.setFirstname(accountApi.getFirstname());
+        account.setLastname(accountApi.getLastname());
+        account.setFunds(accountApi.getFunds());
+
+        return account;
     }
 }

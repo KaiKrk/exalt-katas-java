@@ -1,6 +1,7 @@
 package com.exalt.company.bankaccount.domain.use_cases;
 
 import com.exalt.company.bankaccount.domain.entities.Transaction;
+import com.exalt.company.bankaccount.domain.entities.TransactionType;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +33,7 @@ public class RetrieveTransactionHistoryTest {
         LocalDate date = LocalDate.now();
         Double amount = +1500D;
         Boolean isSuccessful = true;
-        List<Transaction> transactionList = Lists.newArrayList(new Transaction(transactionId,date,accountId,amount));
+        List<Transaction> transactionList = Lists.newArrayList(new Transaction(transactionId,date, TransactionType.DEPOSIT,accountId,amount));
         doReturn(transactionList).when(transactionPort).getHistory(accountId);
 
         //When

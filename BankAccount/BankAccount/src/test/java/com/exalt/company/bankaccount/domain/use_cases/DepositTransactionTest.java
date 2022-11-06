@@ -2,6 +2,7 @@ package com.exalt.company.bankaccount.domain.use_cases;
 
 import com.exalt.company.bankaccount.domain.entities.Account;
 import com.exalt.company.bankaccount.domain.entities.Transaction;
+import com.exalt.company.bankaccount.domain.entities.TransactionType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -47,7 +48,7 @@ public class DepositTransactionTest {
         LocalDate date = LocalDate.now();
         Double amount = 500D;
 
-        Transaction transaction = new Transaction(transactionId,date ,account.getId(),amount);
+        Transaction transaction = new Transaction(transactionId,date, TransactionType.DEPOSIT ,account.getId(),amount);
         // w stands for working account, a local variable used to be manipulated
         Account wAccount = new Account(account.getId(),account.getFirstname(),account.getLastname(),account.getFunds());
         wAccount.setFunds(5500D);

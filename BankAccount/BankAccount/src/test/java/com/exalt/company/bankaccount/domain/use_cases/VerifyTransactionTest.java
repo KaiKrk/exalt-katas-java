@@ -2,6 +2,7 @@ package com.exalt.company.bankaccount.domain.use_cases;
 
 import com.exalt.company.bankaccount.domain.entities.Account;
 import com.exalt.company.bankaccount.domain.entities.Transaction;
+import com.exalt.company.bankaccount.domain.entities.TransactionType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +33,7 @@ public class VerifyTransactionTest {
         LocalDate date = LocalDate.now();
         Double amount = 500D;
 
-        Transaction transaction = new Transaction(transactionId,date ,account.getId(),amount);
+        Transaction transaction = new Transaction(transactionId,date, TransactionType.WITHDRAW ,account.getId(),amount);
         //When
         Boolean isValid = verifyTransaction.verifyFunds(account, transaction);
 
@@ -47,7 +48,7 @@ public class VerifyTransactionTest {
         LocalDate date = LocalDate.now();
         Double amount = 20000D;
 
-        Transaction transaction = new Transaction(transactionId,date ,account.getId(),amount);
+        Transaction transaction = new Transaction(transactionId,date, TransactionType.WITHDRAW ,account.getId(),amount);
         //When
         Boolean isValid = verifyTransaction.verifyFunds(account, transaction);
 

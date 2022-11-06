@@ -9,4 +9,6 @@ public interface AccountPort {
 
     Account getAccount(String accountId);
 
+    Account create(Account account);
+
 }

@@ -1,18 +1,20 @@
 package com.exalt.company.bankaccount.domain.use_cases;
 
 import com.exalt.company.bankaccount.domain.entities.Account;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RetrieveAccount {
+public class CreateAccount {
 
     private final AccountPort accountPort;
 
-    RetrieveAccount(AccountPort accountPort){
+    CreateAccount(AccountPort accountPort){
         this.accountPort = accountPort;
     }
 
-    public Account execute(String accountId){
-      return accountPort.getAccount(accountId);
-    };
+
+    public Account execute(Account account){
+       return accountPort.create(account);
+    }
 }

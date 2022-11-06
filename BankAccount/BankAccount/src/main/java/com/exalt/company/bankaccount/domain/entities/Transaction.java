@@ -7,6 +7,8 @@ public class Transaction {
     private String id;
     private LocalDate date;
 
+    private TransactionType type;
+
     private String account;
     private Double amount;
 
@@ -14,11 +16,21 @@ public class Transaction {
 
     public Transaction (){};
 
-    public Transaction (String id, LocalDate date, String account, Double amount){
+    public Transaction (String id, LocalDate date,TransactionType type, String account, Double amount){
         this.id = id;
         this.date = date;
+        this.type = type;
         this.account = account;
         this.amount = amount;
+    }
+
+    public Transaction (String id, LocalDate date,TransactionType type ,String account, Double amount, Boolean isSuccesful){
+        this.id = id;
+        this.date = date;
+        this.type = type;
+        this.account = account;
+        this.amount = amount;
+        this.isSuccesful = isSuccesful;
     }
 
     public String getId() {

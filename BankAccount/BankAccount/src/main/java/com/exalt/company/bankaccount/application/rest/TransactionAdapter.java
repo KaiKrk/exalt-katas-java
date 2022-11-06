@@ -7,9 +7,8 @@ import com.exalt.company.bankaccount.domain.use_cases.RetrieveAccount;
 import com.exalt.company.bankaccount.domain.use_cases.RetrieveTransactionHistory;
 import com.exalt.company.bankaccount.domain.use_cases.WithdrawTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,16 +32,23 @@ public class TransactionAdapter {
 
     }
 
+
+    @PostMapping("/deposit")
+    @ResponseStatus(HttpStatus.OK)
     public void depositTransaction(@RequestBody String accountId, TransactionApi transactionApi){
         depositTransaction.executeDepositTransaction(accountId, TransactionApi.toTransaction(transactionApi));
     }
 
+    @PostMapping("/withdraw")
+    @ResponseStatus(HttpStatus.OK)
     public void withdrawTransaction(@RequestBody String accountId, TransactionApi transactionApi){
         withdrawTransaction.executeWithdrawTransaction(retrieveAccount.execute(accountId), TransactionApi.toTransaction(transactionApi));
     }
 
-    public List<TransactionApi> getTransactionHistory(@RequestBody AccountApi accountApi){
-        return retrieveTransactionHistory.execute(accountApi.getId()).stream().map(transaction -> TransactionApi.toTransactionApi(transaction)).collect(Collectors.toList());
+    @GetMapping("/history")
+    @ResponseStatus(HttpStatus.OK)
+    public List<TransactionApi> getTransactionHistory(@RequestParam String accountId){
+        return retrieveTransactionHistory.execute(accountId).stream().map(transaction -> TransactionApi.toTransactionApi(transaction)).collect(Collectors.toList());
     }
 
 
