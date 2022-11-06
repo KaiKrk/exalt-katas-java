@@ -4,27 +4,19 @@ import com.exalt.company.bankaccount.domain.entities.Account;
 import com.exalt.company.bankaccount.domain.entities.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@ExtendWith(MockitoExtension.class)
-public class SubmitTransactionTest {
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doReturn;
+
+public class DepositTransactionTest {
 
     @Mock
     TransactionPort transactionPort;
 
-    @InjectMocks
-    SubmitTransaction submitTransaction;
     Account account;
     LocalDate date = LocalDate.now();
 
@@ -37,8 +29,9 @@ public class SubmitTransactionTest {
         this.account =  new Account(accountId, firstname,lastname,funds);
     }
 
+
     @Test
-    public void addTransactionForAccountShouldUpdateItsFunds(){
+    public void addDepositForAccountShouldUpdateItsFunds(){
         //Given
         String transactionId = UUID.randomUUID().toString();
         LocalDate date = LocalDate.now();
@@ -51,24 +44,10 @@ public class SubmitTransactionTest {
         doReturn(wAccount).when(transactionPort).updateAccount(account, transaction);
         //When
         Account updatedAccount = transactionPort.updateAccount(account, transaction);
-
-        System.out.println(account.getFunds());
         //Then
         assertThat(updatedAccount.getFunds()).isEqualTo(account.getFunds()+amount);
     }
 
 
 
-    @Test
-    void withdrawMoreThanFundsShouldRaiseAnError(){
-        //Given
-        String transactionId = UUID.randomUUID().toString();
-
-        Double amount = -10000D;
-
-        Transaction transaction = new Transaction(transactionId,date ,account.getId(),amount);
-        when(transactionPort.updateAccount(account,transaction)).thenThrow(new IllegalArgumentException("Bank Transaction failed : not enough funds "));
-        //Then
-        assertThrows(IllegalArgumentException.class, () -> transactionPort.updateAccount(account, transaction), "Bank Transaction failed : not enough funds ");
-    }
 }

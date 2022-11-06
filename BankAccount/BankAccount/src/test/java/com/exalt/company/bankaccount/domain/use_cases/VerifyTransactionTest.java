@@ -30,7 +30,7 @@ public class VerifyTransactionTest {
         //Given
         String transactionId = UUID.randomUUID().toString();
         LocalDate date = LocalDate.now();
-        Double amount = -500D;
+        Double amount = 500D;
 
         Transaction transaction = new Transaction(transactionId,date ,account.getId(),amount);
         //When
@@ -45,7 +45,7 @@ public class VerifyTransactionTest {
         //Given
         String transactionId = UUID.randomUUID().toString();
         LocalDate date = LocalDate.now();
-        Double amount = -20000D;
+        Double amount = 20000D;
 
         Transaction transaction = new Transaction(transactionId,date ,account.getId(),amount);
         //When

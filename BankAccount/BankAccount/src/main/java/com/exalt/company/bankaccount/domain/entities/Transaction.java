@@ -1,7 +1,6 @@
 package com.exalt.company.bankaccount.domain.entities;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Transaction {
 
@@ -12,6 +11,8 @@ public class Transaction {
     private Double amount;
 
     private Boolean isSuccesful;
+
+    public Transaction (){};
 
     public Transaction (String id, LocalDate date, String account, Double amount){
         this.id = id;
@@ -42,5 +43,22 @@ public class Transaction {
 
     public void setSuccesful(Boolean succesful) {
         isSuccesful = succesful;
+    }
+
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 }

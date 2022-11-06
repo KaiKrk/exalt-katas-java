@@ -10,6 +10,7 @@ public class Account {
     private String lastname;
     private Double funds;
 
+    public Account(){}
     public Account(String id, String firstname, String lastname, Double funds){
         this.id = id;
         this.firstname = firstname;
@@ -35,5 +36,17 @@ public class Account {
 
     public void setFunds(Double funds) {
         this.funds = funds;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -6,4 +6,5 @@ import com.exalt.company.bankaccount.domain.entities.Transaction;
 public interface TransactionPort {
 
     Account updateAccount(Account account, Transaction transaction);
+
 }
