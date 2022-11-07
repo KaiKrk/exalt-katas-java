@@ -54,9 +54,9 @@ public class DepositTransactionTest {
         Account wAccount = new Account(account.getId(),account.getFirstname(),account.getLastname(),account.getFunds());
         wAccount.setFunds(5500D);
 
-        doReturn(AccountApi.toAccountApi(wAccount)).when(depositTransaction).executeDepositTransaction(account.getId(), transaction);
+        doReturn(AccountApi.toAccountApi(wAccount)).when(depositTransaction).executeDepositTransaction(account, transaction);
         //When
-        AccountApi updatedAccount = depositTransaction.executeDepositTransaction(account.getId(), transaction);
+        AccountApi updatedAccount = depositTransaction.executeDepositTransaction(account, transaction);
         //Then
         assertThat(updatedAccount.getFunds()).isEqualTo(account.getFunds()+amount);
     }

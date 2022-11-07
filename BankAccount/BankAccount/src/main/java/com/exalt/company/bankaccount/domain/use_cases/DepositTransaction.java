@@ -25,14 +25,21 @@ public class DepositTransaction {
 
     public AccountApi executeDepositTransaction(Account userAccount,Transaction transaction){
 
-        transaction.setType(TransactionType.DEPOSIT);
-        transaction.setAccount(userAccount.getId());
-        transaction.setDate(LocalDate.now());
-        transaction.setSuccesful(true);
-        transactionPort.save(transaction);
+        if(VerifyTransaction.verifyAmount(transaction)){
+            transaction.setType(TransactionType.DEPOSIT);
+            transaction.setAccount(userAccount.getId());
+            transaction.setDate(LocalDate.now());
+            transaction.setSuccesful(true);
+            transactionPort.save(transaction);
 
-        userAccount.setFunds(userAccount.getFunds()+transaction.getAmount());
+            userAccount.setFunds(userAccount.getFunds()+transaction.getAmount());
 
-        return AccountApi.toAccountApi( accountPort.updateAccount(userAccount));
+            return AccountApi.toAccountApi( accountPort.updateAccount(userAccount));
+        } else {
+
+            throw new IllegalArgumentException();
+        }
+
+
     };
 }
