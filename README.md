@@ -1,20 +1,24 @@
 # eXalt IT Java Dojo
 
-## How-to
+Application Bank Account :
 
-Livraison via un repo `gitlab`, `github` ou `bitbucket` de votre choix 😊
+cette application effectue les opérations bancaire simple comme le depot et le retrait d'argent du compte d'un utilisateur préinscrit, la consultation de son compte et de ses transactions.
 
-Si vous êtes familier avec le TDD, n'hésitez pas à réaliser des commits intermédaires pour matérialiser votre routine red/green/refactor.
+Technologies 
+Architecture hexagonale
 
-Au plaisir de lire votre code !
+Languages : Java 8.
+Framework : Spring, Hibernate, Maven, Log4j
+Base de données : Postgresql.
 
-## Java Optim
-Pour les moins timides, un kata qui permet d'évaluer l'élégance algorithmique.
+Installation 
 
-[Produire une collision de hashcodes pour 3 chaînes de caractères](/optim-SameHashCode)
+Base de données :
 
-## Programmation OO et archi hexa
-[String Calculator](/StringCalculator)
+Script : 
+création de la base : [bank_account_kata_schema.zip](https://github.com/KaiKrk/exalt-katas-java/files/9951234/bank_account_kata_schema.zip)
+jeu de donnée : [bank_account_kata_datas.zip](https://github.com/KaiKrk/exalt-katas-java/files/9951232/bank_account_kata_datas.zip)
 
-[Bank Account](/BankAccount)
+
+
 
