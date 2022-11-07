@@ -17,6 +17,11 @@ public class VerifyTransaction {
         } else return false;
     }
 
+    /**
+     * verify if the amount is valid or not
+     * @param transaction
+     * @return
+     */
     public static Boolean verifyAmount(Transaction transaction){
         if (transaction.getAmount() > 0){
             return true;

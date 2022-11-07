@@ -9,6 +9,9 @@ import javax.swing.text.html.Option;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Adapter used for all persistance operation for the table Account
+ */
 @Component
 public class AccountDatabaseAdapter implements AccountPort {
 

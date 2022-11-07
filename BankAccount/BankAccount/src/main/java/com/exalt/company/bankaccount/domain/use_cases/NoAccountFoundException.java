@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.NoSuchElementException;
 
-@ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
 public class NoAccountFoundException extends NoSuchElementException {
 
     public NoAccountFoundException() {

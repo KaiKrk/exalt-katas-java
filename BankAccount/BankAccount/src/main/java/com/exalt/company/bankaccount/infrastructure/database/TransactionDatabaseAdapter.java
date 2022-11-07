@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Adapter used for all persistance operation for the table Transaction
+ */
 @Component
 public class TransactionDatabaseAdapter implements TransactionPort {
 
@@ -24,6 +27,12 @@ public class TransactionDatabaseAdapter implements TransactionPort {
         this.transactionJpaRepository = transactionJpaRepository;
         this.accountJpaRepository = accountJpaRepository;
     }
+
+    /**
+     * get alll transaction for a user id
+     * @param id
+     * @return list of transaction
+     */
     @Override
     public List<Transaction> getHistory(String id) {
         return transactionJpaRepository.findAllByAccount_Id(id).stream().map(this::toTransaction).collect(Collectors.toList());

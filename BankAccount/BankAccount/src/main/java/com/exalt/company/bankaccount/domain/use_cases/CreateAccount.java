@@ -4,6 +4,7 @@ import com.exalt.company.bankaccount.domain.entities.Account;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class CreateAccount {
 

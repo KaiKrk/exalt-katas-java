@@ -2,6 +2,7 @@ package com.exalt.company.bankaccount.application.rest;
 
 import com.exalt.company.bankaccount.domain.entities.Account;
 
+
 public class AccountApi {
 
     private String id;

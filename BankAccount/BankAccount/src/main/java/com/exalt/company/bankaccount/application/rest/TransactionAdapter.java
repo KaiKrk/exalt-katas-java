@@ -16,6 +16,9 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Controller for transaction operations
+ */
 @RestController
 @RequestMapping("/transaction")
 public class TransactionAdapter {
