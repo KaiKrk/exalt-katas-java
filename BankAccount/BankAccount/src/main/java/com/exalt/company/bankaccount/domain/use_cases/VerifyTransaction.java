@@ -12,7 +12,7 @@ public class VerifyTransaction {
      * @return
      */
     public static Boolean verifyFunds(Account account, Transaction transaction){
-        if (account.getFunds() - transaction.getAmount() > 0 && verifyAmount(transaction)){
+        if (account.getFunds() - transaction.getAmount() >= 0 && verifyAmount(transaction)){
             return true;
         } else return false;
     }

@@ -14,12 +14,6 @@ public class Account {
     private String lastname;
     private Double funds;
 
-    /**
-     * Semaphore is used here to assure that withdraw process can only be executed one at a time to ensure proper funds verifying process
-     */
-    @JsonIgnore
-    private Semaphore semaphore = new Semaphore(1);
-
     public Account(){}
 
     public Account( String firstname, String lastname, Double funds){
@@ -48,10 +42,6 @@ public class Account {
 
     public Double getFunds() {
         return funds;
-    }
-
-    public Semaphore getSemaphore() {
-        return semaphore;
     }
 
     public void setFunds(Double funds) {

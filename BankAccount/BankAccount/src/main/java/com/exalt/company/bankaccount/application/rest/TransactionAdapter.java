@@ -6,6 +6,8 @@ import com.exalt.company.bankaccount.domain.use_cases.DepositTransaction;
 import com.exalt.company.bankaccount.domain.use_cases.RetrieveAccount;
 import com.exalt.company.bankaccount.domain.use_cases.RetrieveTransactionHistory;
 import com.exalt.company.bankaccount.domain.use_cases.WithdrawTransaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,7 @@ public class TransactionAdapter {
 
     private final RetrieveAccount retrieveAccount;
 
+    Logger logger = LoggerFactory.getLogger(TransactionAdapter.class);
     @Autowired
     public TransactionAdapter (RetrieveTransactionHistory retrieveTransactionHistory,WithdrawTransaction withdrawTransaction,DepositTransaction depositTransaction, RetrieveAccount retrieveAccount){
         this.retrieveTransactionHistory = retrieveTransactionHistory;
@@ -38,7 +41,8 @@ public class TransactionAdapter {
     @ResponseStatus(HttpStatus.OK)
     public void depositTransaction(@RequestParam String accountId ,@RequestBody TransactionApi transactionApi){
 
-        depositTransaction.executeDepositTransaction(retrieveAccount.execute(accountId), TransactionApi.toTransaction(transactionApi));
+        AccountApi accountApi = depositTransaction.executeDepositTransaction(retrieveAccount.execute(accountId), TransactionApi.toTransaction(transactionApi));
+        logger.info("deposit executed");
     }
 
     @PostMapping("/withdraw")
@@ -47,6 +51,7 @@ public class TransactionAdapter {
 
         try {
             withdrawTransaction.executeWithdrawTransaction(retrieveAccount.execute(accountId), TransactionApi.toTransaction(transactionApi));
+            logger.info("withdraw executed for {} " ,accountId);
         }
         catch (InterruptedException exc) {
             throw new ResponseStatusException(

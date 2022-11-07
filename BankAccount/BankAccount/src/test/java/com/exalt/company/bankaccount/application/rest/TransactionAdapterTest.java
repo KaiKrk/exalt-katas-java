@@ -22,6 +22,7 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -59,6 +60,9 @@ public class TransactionAdapterTest {
 
     @MockBean
     AccountApi accountApi;
+
+    @MockBean
+    Logger logger;
 
     ObjectMapper objectMapper;
 

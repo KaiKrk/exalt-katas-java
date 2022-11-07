@@ -27,7 +27,7 @@ public class WithdrawTransactionTest {
     @Mock
     VerifyTransaction verifyTransaction;
 
-    @InjectMocks
+    @Mock
     WithdrawTransaction withdrawTransaction;
     Account account;
     LocalDate date = LocalDate.now();

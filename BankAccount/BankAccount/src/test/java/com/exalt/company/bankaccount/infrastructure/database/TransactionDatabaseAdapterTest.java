@@ -46,6 +46,6 @@ public class TransactionDatabaseAdapterTest {
 
         // Then
         verify(transactionJpaRepository).save(accountJpaArgumentCaptor.capture());
-        assertThat(accountJpaArgumentCaptor.getValue().getId()).isEqualTo(transaction.getId());
+        assertThat(accountJpaArgumentCaptor.getValue().getAmount()).isEqualTo(transaction.getAmount());
     }
 }

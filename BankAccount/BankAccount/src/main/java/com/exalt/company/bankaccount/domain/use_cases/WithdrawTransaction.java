@@ -25,7 +25,6 @@ public class WithdrawTransaction {
     public Account executeWithdrawTransaction(Account account, Transaction transaction) throws InterruptedException {
 
         if(VerifyTransaction.verifyFunds(account,transaction)){
-            account.getSemaphore().acquire();
             transaction.setType(TransactionType.WITHDRAW);
             transaction.setAccount(account.getId());
             transaction.setDate(LocalDate.now());
@@ -34,17 +33,14 @@ public class WithdrawTransaction {
 
             account.setFunds(account.getFunds()-transaction.getAmount());
             Account updatedAccount =  accountPort.updateAccount(account);
-            account.getSemaphore().release();
             return  updatedAccount;
 
         } else {
-            account.getSemaphore().acquire();
             transaction.setDate(LocalDate.now());
             transaction.setType(TransactionType.WITHDRAW);
             transaction.setSuccesful(false);
             transactionPort.save(transaction);
 
-            account.getSemaphore().release();
           throw new NotEnoughFundsException();
         }
     }

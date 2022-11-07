@@ -1,7 +1,10 @@
 package com.exalt.company.bankaccount.infrastructure.database;
 
+import com.exalt.company.bankaccount.application.rest.TransactionAdapter;
 import com.exalt.company.bankaccount.domain.entities.Transaction;
 import com.exalt.company.bankaccount.domain.use_cases.TransactionPort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +14,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class TransactionDatabaseAdapter implements TransactionPort {
+
+    Logger logger = LoggerFactory.getLogger(TransactionDatabaseAdapter.class);
 
     private final TransactionJpaRepository transactionJpaRepository;
     private final AccountJpaRepository accountJpaRepository;
@@ -26,10 +31,11 @@ public class TransactionDatabaseAdapter implements TransactionPort {
 
     @Override
     public Transaction save(Transaction transaction) {
-        System.out.println("transaction : " + transaction);
+        logger.info("transaction : " + transaction);
         TransactionJpa transactionJpa = new TransactionJpa(transaction);
-        transactionJpa.setId(UUID.randomUUID().toString());
-        System.out.println("account : " + accountJpaRepository.findById(transaction.getAccount()).get());
+        if(transaction.getId() == null)
+            transactionJpa.setId(UUID.randomUUID().toString());
+
         transactionJpa.setAccount(accountJpaRepository.findById(transaction.getAccount()).get());
         return toTransaction(transactionJpaRepository.save(transactionJpa));
     }
