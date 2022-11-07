@@ -27,7 +27,7 @@ spring.datasource.driverClassName=org.postgresql.Driver
 spring.datasource.url = jdbc:postgresql://localhost:5432/bank_account_kata
 spring.datasource.username = postgres
 spring.datasource.password = 123456
-logging.file.name = logs
+
 
 ```
 
