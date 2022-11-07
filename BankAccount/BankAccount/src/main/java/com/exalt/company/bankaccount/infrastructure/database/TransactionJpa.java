@@ -4,6 +4,7 @@ import com.exalt.company.bankaccount.domain.entities.Account;
 import com.exalt.company.bankaccount.domain.entities.Transaction;
 import com.exalt.company.bankaccount.domain.entities.TransactionType;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ public class TransactionJpa {
 
     @ManyToOne
     @JoinColumn(name = "account_id")
+    @ToString.Exclude
     private AccountJpa account;
     private Double amount;
 

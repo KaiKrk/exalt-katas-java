@@ -54,7 +54,7 @@ public class TransactionApi {
 
     static TransactionApi toTransactionApi (Transaction transaction){
         TransactionApi transactionApi = new TransactionApi();
-        transactionApi.setId(transactionApi.getId());
+        transactionApi.setId(transaction.getId());
         transactionApi.setAccount(transaction.getAccount());
         transactionApi.setAmount(transaction.getAmount());
         transactionApi.setDate(transaction.getDate());

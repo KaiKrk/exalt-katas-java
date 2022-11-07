@@ -26,7 +26,10 @@ public class TransactionDatabaseAdapter implements TransactionPort {
 
     @Override
     public Transaction save(Transaction transaction) {
+        System.out.println("transaction : " + transaction);
         TransactionJpa transactionJpa = new TransactionJpa(transaction);
+        transactionJpa.setId(UUID.randomUUID().toString());
+        System.out.println("account : " + accountJpaRepository.findById(transaction.getAccount()).get());
         transactionJpa.setAccount(accountJpaRepository.findById(transaction.getAccount()).get());
         return toTransaction(transactionJpaRepository.save(transactionJpa));
     }

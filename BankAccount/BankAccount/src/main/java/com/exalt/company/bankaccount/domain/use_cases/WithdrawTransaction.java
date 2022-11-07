@@ -2,7 +2,10 @@ package com.exalt.company.bankaccount.domain.use_cases;
 
 import com.exalt.company.bankaccount.domain.entities.Account;
 import com.exalt.company.bankaccount.domain.entities.Transaction;
+import com.exalt.company.bankaccount.domain.entities.TransactionType;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 @Component
 public class WithdrawTransaction {
@@ -23,16 +26,21 @@ public class WithdrawTransaction {
 
         if(VerifyTransaction.verifyFunds(account,transaction)){
             account.getSemaphore().acquire();
+            transaction.setType(TransactionType.WITHDRAW);
+            transaction.setAccount(account.getId());
+            transaction.setDate(LocalDate.now());
             transaction.setSuccesful(true);
             transactionPort.save(transaction);
 
-            account.setFunds(account.getFunds()+transaction.getAmount());
+            account.setFunds(account.getFunds()-transaction.getAmount());
+            Account updatedAccount =  accountPort.updateAccount(account);
             account.getSemaphore().release();
-            return  accountPort.updateAccount(account);
+            return  updatedAccount;
 
         } else {
             account.getSemaphore().acquire();
-
+            transaction.setDate(LocalDate.now());
+            transaction.setType(TransactionType.WITHDRAW);
             transaction.setSuccesful(false);
             transactionPort.save(transaction);
 

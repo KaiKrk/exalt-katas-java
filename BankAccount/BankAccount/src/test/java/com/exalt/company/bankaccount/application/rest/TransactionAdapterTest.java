@@ -92,7 +92,7 @@ public class TransactionAdapterTest {
         Transaction transaction = new Transaction(transactionId,date, TransactionType.DEPOSIT ,account.getId(),amount);
 
 
-        Mockito.when(depositTransaction.executeDepositTransaction(account.getId(), transaction)).thenReturn(AccountApi.toAccountApi(account));
+        Mockito.when(depositTransaction.executeDepositTransaction(account, transaction)).thenReturn(AccountApi.toAccountApi(account));
 
         mockMvc.perform(MockMvcRequestBuilders.post("/transaction/deposit?accountId="+account.getId())
                         .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(transaction)))
@@ -109,7 +109,7 @@ public class TransactionAdapterTest {
 
         Transaction transaction = new Transaction(transactionId, date, TransactionType.WITHDRAW, account.getId(), amount);
 
-        Mockito.when(depositTransaction.executeDepositTransaction(account.getId(), transaction)).thenReturn(AccountApi.toAccountApi(account));
+        Mockito.when(depositTransaction.executeDepositTransaction(account, transaction)).thenReturn(AccountApi.toAccountApi(account));
 
         mockMvc.perform(MockMvcRequestBuilders.post("/transaction/withdraw?accountId=" + account.getId())
                         .contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(transaction)))

@@ -37,7 +37,8 @@ public class TransactionAdapter {
     @PostMapping("/deposit")
     @ResponseStatus(HttpStatus.OK)
     public void depositTransaction(@RequestParam String accountId ,@RequestBody TransactionApi transactionApi){
-        depositTransaction.executeDepositTransaction(accountId, TransactionApi.toTransaction(transactionApi));
+
+        depositTransaction.executeDepositTransaction(retrieveAccount.execute(accountId), TransactionApi.toTransaction(transactionApi));
     }
 
     @PostMapping("/withdraw")

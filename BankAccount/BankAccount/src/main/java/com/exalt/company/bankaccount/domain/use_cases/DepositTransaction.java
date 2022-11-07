@@ -3,7 +3,10 @@ package com.exalt.company.bankaccount.domain.use_cases;
 import com.exalt.company.bankaccount.application.rest.AccountApi;
 import com.exalt.company.bankaccount.domain.entities.Account;
 import com.exalt.company.bankaccount.domain.entities.Transaction;
+import com.exalt.company.bankaccount.domain.entities.TransactionType;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 @Component
 public class DepositTransaction {
@@ -20,9 +23,11 @@ public class DepositTransaction {
         this.retrieveAccount = retrieveAccount;
     }
 
-    public AccountApi executeDepositTransaction(String accountId,Transaction transaction){
-        Account userAccount = retrieveAccount.execute(accountId);
+    public AccountApi executeDepositTransaction(Account userAccount,Transaction transaction){
 
+        transaction.setType(TransactionType.DEPOSIT);
+        transaction.setAccount(userAccount.getId());
+        transaction.setDate(LocalDate.now());
         transaction.setSuccesful(true);
         transactionPort.save(transaction);
 
