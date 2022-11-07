@@ -16,10 +16,11 @@ public class AccountFixture {
     }
 
     public static Account aNewAccount(){
+        String id = UUID.randomUUID().toString();
         String firstname = "Patrick";
         String lastname = "Dou";
         Double funds = 25000D;
 
-        return new Account(firstname,lastname,funds);
+        return new Account(id,firstname,lastname,funds);
     }
 }

@@ -52,6 +52,10 @@ public class Transaction {
         return isSuccesful;
     }
 
+    public TransactionType getType() {
+        return type;
+    }
+
     public void setSuccesful(Boolean succesful) {
         isSuccesful = succesful;
     }
@@ -71,5 +75,9 @@ public class Transaction {
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public void setType(TransactionType type) {
+        this.type = type;
     }
 }

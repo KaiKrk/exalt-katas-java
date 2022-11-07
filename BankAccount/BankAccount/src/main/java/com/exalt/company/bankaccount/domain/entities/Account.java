@@ -1,5 +1,7 @@
 package com.exalt.company.bankaccount.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Transient;
 import java.math.BigDecimal;
 import java.util.concurrent.Semaphore;
@@ -15,6 +17,7 @@ public class Account {
     /**
      * Semaphore is used here to assure that withdraw process can only be executed one at a time to ensure proper funds verifying process
      */
+    @JsonIgnore
     private Semaphore semaphore = new Semaphore(1);
 
     public Account(){}

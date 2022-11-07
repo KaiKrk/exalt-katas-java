@@ -25,6 +25,9 @@ public class RetrieveTransactionHistoryTest {
     @InjectMocks
     RetrieveTransactionHistory retrieveTransactionHistory;
 
+    @Mock
+    RetrieveAccount retrieveAccount;
+
     @Test
     void getAllTransactionHistory(){
         //Given

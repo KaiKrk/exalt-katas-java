@@ -24,7 +24,7 @@ public class DepositTransaction {
         Account userAccount = retrieveAccount.execute(accountId);
 
         transaction.setSuccesful(true);
-        Transaction newTransaction = transactionPort.save(transaction);
+        transactionPort.save(transaction);
 
         userAccount.setFunds(userAccount.getFunds()+transaction.getAmount());
 

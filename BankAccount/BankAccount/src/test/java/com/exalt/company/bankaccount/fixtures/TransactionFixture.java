@@ -10,11 +10,10 @@ import java.util.UUID;
 
 public class TransactionFixture {
 
-    public static Transaction aTransaction() {
+    public static Transaction aTransaction(String accountId) {
 
 
         LocalDate aRandomDate = LocalDate.of(2022, 10, 8);
-        String accountId = "101";
 
         return new Transaction(UUID.randomUUID().toString(), aRandomDate, TransactionType.DEPOSIT , accountId, 500D, true);
 

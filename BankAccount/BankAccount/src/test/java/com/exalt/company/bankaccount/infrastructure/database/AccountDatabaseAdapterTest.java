@@ -9,7 +9,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.UUID;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -25,13 +28,14 @@ public class AccountDatabaseAdapterTest {
     void save_shouldSaveByUsingJpaRepository() {
         // Given
         Account account = AccountFixture.aNewAccount();
+        AccountJpa accountJpa = new AccountJpa(account);
         ArgumentCaptor<AccountJpa> accountJpaArgumentCaptor = ArgumentCaptor.forClass(AccountJpa.class);
-
+        doReturn(accountJpa).when(accountJpaRepository).save(accountJpa);
         // When
-        accountDatabaseAdapter.create(account);
+        accountDatabaseAdapter.updateAccount(account);
 
         // Then
         verify(accountJpaRepository).save(accountJpaArgumentCaptor.capture());
-        assertThat(accountJpaArgumentCaptor.getValue()).usingRecursiveComparison().isEqualTo(account);
+        assertThat(accountJpaArgumentCaptor.getValue().getFirstname()).isEqualTo(account.getFirstname());
     }
 }

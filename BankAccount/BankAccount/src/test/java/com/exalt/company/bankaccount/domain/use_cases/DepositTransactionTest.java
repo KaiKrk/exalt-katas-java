@@ -53,7 +53,8 @@ public class DepositTransactionTest {
         // w stands for working account, a local variable used to be manipulated
         Account wAccount = new Account(account.getId(),account.getFirstname(),account.getLastname(),account.getFunds());
         wAccount.setFunds(5500D);
-        doReturn(wAccount).when(depositTransaction).executeDepositTransaction(account.getId(), transaction);
+
+        doReturn(AccountApi.toAccountApi(wAccount)).when(depositTransaction).executeDepositTransaction(account.getId(), transaction);
         //When
         AccountApi updatedAccount = depositTransaction.executeDepositTransaction(account.getId(), transaction);
         //Then

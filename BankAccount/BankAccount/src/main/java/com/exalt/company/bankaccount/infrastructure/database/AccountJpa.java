@@ -13,8 +13,7 @@ public class AccountJpa {
 
     @Id
     @Column(name = "account_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
     private String firstname;
     private String lastname;
     private Double funds;
@@ -23,6 +22,7 @@ public class AccountJpa {
     private List<TransactionJpa> transactions;
 
     AccountJpa(Account account){
+        this.id = account.getId();
         this.firstname = account.getFirstname();
         this.lastname = account.getLastname();
         this.funds = account.getFunds();
@@ -32,12 +32,5 @@ public class AccountJpa {
 
     }
 
-    static Account toAccount(AccountJpa accountJpa){
-        Account account = new Account();
-        account.setId(accountJpa.getId().toString());
-        account.setFirstname(accountJpa.getFirstname());
-        account.setLastname(accountJpa.getLastname());
-        account.setFunds(accountJpa.getFunds());
-        return account;
-    }
+
 }
